@@ -1,0 +1,36 @@
+# Where Turok 3: Shadow of Oblivion (USA)'s code is, for lib/turok-engine/tools/gen_syms.py, which writes
+# syms/turok3.us.syms.toml from the ROM with it (lib/turok-engine/docs/rom_layout.md has the layout).
+rom = "roms/turok3.us.z64"
+sha1 = "a2e0a28dc0d3a48c7c02cb9e4c4b38fe04b2d436"
+out = "syms/turok3.us.syms.toml"
+names = "syms/names.toml"
+
+# The program: the IPL3 copies the first MB after the header to 0x80000400, t3_boot_main copies the next 512 KB after
+# it, and the entry point maps it all at 0x00200400 with TLB entry 31. Its text, then rodata and data, which the code
+# reads through kseg0 (0x800F1880-0x80114B60); bss follows.
+[[segment]]
+name = "main"
+rom = 0x1000
+vram = 0x00200400
+text_end = 0xF1E80
+data_end = 0x115760
+library = true
+
+# The second block, which t3_VmInit copies from the ROM straight after the program into the top MB of an 8 MB console
+# and maps with TLB entry 0 at 0x00400000. Its rodata and data are in main's but for a few tables between its functions,
+# which otherwise sit end to end with no padding or stale code between them (packed).
+[[segment]]
+name = "ovl"
+rom = 0x115760
+vram = 0x00400000
+text_end = 0x1636B0
+data_end = 0x1636B0
+library = true
+packed = true
+
+# The program as the data sees it, through kseg0: every jump table, the second block's too, is in main's rodata.
+[[alias]]
+name = "main_kseg0"
+rom = 0x1000
+vram = 0x80000400
+size = 0x114760

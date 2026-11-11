@@ -1,0 +1,747 @@
+# Names worked out for Turok 3's functions, kept for good (mods and hooks use them). lib/turok-engine/tools/gen_syms.py
+# takes each as a function start and names it, over n64sym's names and func_<address>. Most are Turok 2's names (its
+# syms/names.toml, most of them PaxDino's from Turok: Rage Wars), found here by their code with the relocated fields
+# masked; t3_ marks the game's own, turok_ the engine's natives.
+
+[[func]]
+vram = 0x00200400
+name = "t3_entrypoint"
+
+[[func]]
+vram = 0x00200488
+name = "t3_SetTLBEntry"
+
+[[func]]
+vram = 0x00202270
+name = "t3_ExceptionVectors"
+
+[[func]]
+vram = 0x002022E0
+name = "t3_InstallExceptionVectors"
+
+[[func]]
+vram = 0x0020238C
+name = "t3_CacheFlush0"
+
+[[func]]
+vram = 0x002023A8
+name = "t3_CacheFlush1"
+
+[[func]]
+vram = 0x002023DC
+name = "t3_ReadTLBEntry"
+
+[[func]]
+vram = 0x00202460
+name = "t3_Exception"
+
+[[func]]
+vram = 0x002028D0
+name = "t3_ExceptionTail0"
+
+[[func]]
+vram = 0x0020AA50
+name = "t3_boot_main"
+
+[[func]]
+vram = 0x00225440
+name = "t3_VmInit"
+
+[[func]]
+vram = 0x00225C80
+name = "t3_TLBMissHandler"
+
+[[func]]
+vram = 0x002261BC
+name = "t3_MapMainTLB"
+
+[[func]]
+vram = 0x002261F8
+name = "turok_vm_map_rom_region"
+
+[[func]]
+vram = 0x002262C4
+name = "t3_VmUnmapRegion"
+
+[[func]]
+vram = 0x0022638C
+name = "t3_VmServerThread"
+
+[[func]]
+vram = 0x00226490
+name = "t3_VmPagerThread"
+
+[[func]]
+vram = 0x00226840
+name = "t3_VmServerMapRegion"
+
+[[func]]
+vram = 0x00243420
+name = "t3_DmaInit"
+
+[[func]]
+vram = 0x0024351C
+name = "t3_DmaRead"
+
+[[func]]
+vram = 0x0024371C
+name = "t3_DmaThread"
+
+[[func]]
+vram = 0x00252C80
+name = "t3_GetMemSize"
+
+[[func]]
+vram = 0x002DCD50
+name = "t3_MapTLB"
+
+[[func]]
+vram = 0x002DCDD0
+name = "osUnmapTLB"
+
+[[func]]
+vram = 0x002DCE0C
+name = "t3_DumpTLB"
+
+[[func]]
+vram = 0x002DD2D4
+name = "t3_SetWatchLo_main"
+
+[[func]]
+vram = 0x002DDA10
+name = "osStartThread"
+
+[[func]]
+vram = 0x002DDB30
+name = "osCreateThread"
+
+[[func]]
+vram = 0x002DDC10
+name = "osSetEventMesg"
+
+[[func]]
+vram = 0x002DDC70
+name = "osPiStartDma"
+
+[[func]]
+vram = 0x002DDD20
+name = "osCreateMesgQueue"
+
+[[func]]
+vram = 0x002DDD50
+name = "osSendMesg"
+
+[[func]]
+vram = 0x002DDE80
+name = "osRecvMesg"
+
+[[func]]
+vram = 0x002DDFB0
+name = "memcpy"
+
+[[func]]
+vram = 0x002DDFD8
+name = "strchr"
+
+[[func]]
+vram = 0x002DE010
+name = "strlen"
+
+[[func]]
+vram = 0x002DE2E0
+name = "sprintf"
+
+[[func]]
+vram = 0x002DE338
+name = "proutSprintf"
+
+[[func]]
+vram = 0x002DE360
+name = "osInitialize"
+
+[[func]]
+vram = 0x002DE5A0
+name = "osWritebackDCacheAll"
+
+[[func]]
+vram = 0x002DE5D0
+name = "osSetIntMask"
+
+[[func]]
+vram = 0x002DE680
+name = "osInvalICache"
+
+[[func]]
+vram = 0x002DED40
+name = "osGetTime"
+
+[[func]]
+vram = 0x002DEDC0
+name = "osUnmapTLBAll"
+
+[[func]]
+vram = 0x002DEE10
+name = "osInvalDCache"
+
+[[func]]
+vram = 0x002DEF00
+name = "__osDisableInt"
+
+[[func]]
+vram = 0x002DEF20
+name = "__osRestoreInt"
+
+[[func]]
+vram = 0x002DEF40
+name = "osJamMesg"
+
+[[func]]
+vram = 0x002DF080
+name = "osSetThreadPri"
+
+[[func]]
+vram = 0x002DF150
+name = "osSetTimer"
+
+[[func]]
+vram = 0x002DF1E0
+name = "osWritebackDCache"
+
+[[func]]
+vram = 0x002DF250
+name = "turok_pi_raw_start_dma"
+
+[[func]]
+vram = 0x002DF330
+name = "turok_ai_get_status"
+
+[[func]]
+vram = 0x002DF380
+name = "alLink"
+
+[[func]]
+vram = 0x002DF410
+name = "osAiSetFrequency"
+
+[[func]]
+vram = 0x002DF9B8
+name = "__allocParam"
+
+[[func]]
+vram = 0x002DF9E4
+name = "__freeParam"
+
+[[func]]
+vram = 0x002DF9FC
+name = "_freePVoice"
+
+[[func]]
+vram = 0x002DFA3C
+name = "_collectPVoices"
+
+[[func]]
+vram = 0x002DFBC0
+name = "osAiSetNextBuffer"
+
+[[func]]
+vram = 0x002DFCA0
+name = "osVirtualToPhysical"
+
+[[func]]
+vram = 0x002DFD00
+name = "alSndpSetFXMix"
+
+[[func]]
+vram = 0x002DFD50
+name = "alSndpSetPitch"
+
+[[func]]
+vram = 0x002E04D0
+name = "alSndpSetPan"
+
+[[func]]
+vram = 0x002E0520
+name = "alSndpSetVol"
+
+[[func]]
+vram = 0x002E0570
+name = "alHeapInit"
+
+[[func]]
+vram = 0x002E0670
+name = "alSndpStop"
+
+[[func]]
+vram = 0x002E0740
+name = "alSndpSetSound"
+
+[[func]]
+vram = 0x002E0780
+name = "alSndpPlay"
+
+[[func]]
+vram = 0x002E1BE0
+name = "n_alSeqpSetVol"
+
+[[func]]
+vram = 0x002E269C
+name = "__readVarLen"
+
+[[func]]
+vram = 0x002E2710
+name = "n_alSeqpSetChlFXMix"
+
+[[func]]
+vram = 0x002E3A2C
+name = "__CSPRepostEvent"
+
+[[func]]
+vram = 0x002E3AF0
+name = "osMotorStop"
+
+[[func]]
+vram = 0x002E3CB4
+name = "osMotorStart"
+
+[[func]]
+vram = 0x002E3E78
+name = "turok_motor_init"
+
+[[func]]
+vram = 0x002E4360
+name = "osGetThreadPri"
+
+[[func]]
+vram = 0x002E4380
+name = "osContInit"
+
+[[func]]
+vram = 0x002E4520
+name = "__osPackRequestData"
+
+[[func]]
+vram = 0x002E4690
+name = "osContReset"
+
+[[func]]
+vram = 0x002E479C
+name = "__osPackResetData"
+
+[[func]]
+vram = 0x002E47D0
+name = "osContStartReadData"
+
+[[func]]
+vram = 0x002E4864
+name = "osContGetReadData"
+
+[[func]]
+vram = 0x002E48FC
+name = "__osPackReadData"
+
+[[func]]
+vram = 0x002E49B0
+name = "osContStartQuery"
+
+[[func]]
+vram = 0x002E4A38
+name = "osContGetQuery"
+
+[[func]]
+vram = 0x002E4CD0
+name = "osViGetCurrentFramebuffer"
+
+[[func]]
+vram = 0x002E4D10
+name = "osViSetYScale"
+
+[[func]]
+vram = 0x002E4D80
+name = "osViSetMode"
+
+[[func]]
+vram = 0x002E4DD0
+name = "osViBlack"
+
+[[func]]
+vram = 0x002E4E30
+name = "osViSwapBuffer"
+
+[[func]]
+vram = 0x002E4E80
+name = "_VirtualToPhysicalTask"
+
+[[func]]
+vram = 0x002E4F68
+name = "osSpTaskLoad"
+
+[[func]]
+vram = 0x002E506C
+name = "osSpTaskStartGo"
+
+[[func]]
+vram = 0x002E50A0
+name = "osDpSetNextBuffer"
+
+[[func]]
+vram = 0x002E5140
+name = "osViSetSpecialFeatures"
+
+[[func]]
+vram = 0x002E52B0
+name = "osViSetEvent"
+
+[[func]]
+vram = 0x002E5310
+name = "osSpTaskYielded"
+
+[[func]]
+vram = 0x002E5370
+name = "__osSetFpcCsr"
+
+[[func]]
+vram = 0x002E5380
+name = "osCreateViManager"
+
+[[func]]
+vram = 0x002E54F0
+name = "viMgrMain"
+
+[[func]]
+vram = 0x002E5EC0
+name = "__osExceptionPreamble"
+
+[[func]]
+vram = 0x002E64B8
+name = "send_mesg"
+
+[[func]]
+vram = 0x002E65BC
+name = "__osEnqueueAndYield"
+
+[[func]]
+vram = 0x002E6758
+name = "__osEnqueueThread"
+
+[[func]]
+vram = 0x002E67A8
+name = "__osPopThread"
+
+[[func]]
+vram = 0x002E69D0
+name = "__osDequeueThread"
+
+[[func]]
+vram = 0x002E6A10
+name = "osCreatePiManager"
+
+[[func]]
+vram = 0x002E6B90
+name = "osPiGetCmdQueue"
+
+[[func]]
+vram = 0x002E6BC0
+name = "_Printf"
+
+[[func]]
+vram = 0x002E7570
+name = "__osSiRawWriteIo"
+
+[[func]]
+vram = 0x002E75F0
+name = "__osSetSR"
+
+[[func]]
+vram = 0x002E7600
+name = "__osSiRawReadIo"
+
+[[func]]
+vram = 0x002E7690
+name = "osPiRawReadIo"
+
+[[func]]
+vram = 0x002E7740
+name = "__osTimerInterrupt"
+
+[[func]]
+vram = 0x002E7888
+name = "__osTimerServicesInit"
+
+[[func]]
+vram = 0x002E78DC
+name = "__osSetTimerIntr"
+
+[[func]]
+vram = 0x002E793C
+name = "__osInsertTimer"
+
+[[func]]
+vram = 0x002E86E4
+name = "_ldexpf"
+
+[[func]]
+vram = 0x002E8710
+name = "alAuxBusPull"
+
+[[func]]
+vram = 0x002E8EA8
+name = "alSaveNew"
+
+[[func]]
+vram = 0x002E9D20
+name = "alSavePull"
+
+[[func]]
+vram = 0x002E9E20
+name = "alSaveParam"
+
+[[func]]
+vram = 0x002E9E70
+name = "alMainBusPull"
+
+[[func]]
+vram = 0x002EA240
+name = "alResampleParam"
+
+[[func]]
+vram = 0x002EA300
+name = "__osAiDeviceBusy"
+
+[[func]]
+vram = 0x002EA320
+name = "__osProbeTLB"
+
+[[func]]
+vram = 0x002EA504
+name = "alEvtqPostEvent"
+
+[[func]]
+vram = 0x002EA610
+name = "alEvtqFlush"
+
+[[func]]
+vram = 0x002EA9C0
+name = "alSynAddPlayer"
+
+[[func]]
+vram = 0x002EAA10
+name = "alSynFreeVoice"
+
+[[func]]
+vram = 0x002EAAB0
+name = "alSynStopVoice"
+
+[[func]]
+vram = 0x002EBF1C
+name = "__mapVoice"
+
+[[func]]
+vram = 0x002EC288
+name = "__vsDelta"
+
+[[func]]
+vram = 0x002EC4C0
+name = "__setInstChanState"
+
+[[func]]
+vram = 0x002EC9E0
+name = "__osContDataCrc"
+
+[[func]]
+vram = 0x002ECA28
+name = "__osContAddressCrc"
+
+[[func]]
+vram = 0x002ECA90
+name = "__osContRamWrite"
+
+[[func]]
+vram = 0x002ECCB0
+name = "__osPackRamWriteData"
+
+[[func]]
+vram = 0x002ECE50
+name = "__osSiRawStartDma"
+
+[[func]]
+vram = 0x002ED000
+name = "__osContRamRead"
+
+[[func]]
+vram = 0x002ED230
+name = "__osPackRamReadData"
+
+[[func]]
+vram = 0x002ED3C0
+name = "__osViInit"
+
+[[func]]
+vram = 0x002ED4C0
+name = "__osSpSetStatus"
+
+[[func]]
+vram = 0x002ED4E0
+name = "__osSpSetPc"
+
+[[func]]
+vram = 0x002ED530
+name = "__osSpRawStartDma"
+
+[[func]]
+vram = 0x002ED6A0
+name = "__osViSwapContext"
+
+[[func]]
+vram = 0x002ED9E0
+name = "osDestroyThread"
+
+[[func]]
+vram = 0x002EE160
+name = "t3_PiRomHandleInit"
+
+[[func]]
+vram = 0x002EE4F0
+name = "__osDevMgrMain"
+
+[[func]]
+vram = 0x002EE890
+name = "osCartRomInit"
+
+[[func]]
+vram = 0x002EF578
+name = "alFxParam"
+
+[[func]]
+vram = 0x002EF820
+name = "alFilterNew"
+
+[[func]]
+vram = 0x002EFCAC
+name = "alSeqSetLoc"
+
+[[func]]
+vram = 0x002EFCC8
+name = "alSeqGetLoc"
+
+[[func]]
+vram = 0x002EFCE4
+name = "__alSeqNextDelta"
+
+[[func]]
+vram = 0x002EFDA0
+name = "read8"
+
+[[func]]
+vram = 0x002EFE50
+name = "osYieldThread"
+
+[[func]]
+vram = 0x002F0040
+name = "__osResetGlobalIntMask"
+
+[[func]]
+vram = 0x002F01D0
+name = "__osSetGlobalIntMask"
+
+[[func]]
+vram = 0x00406B20
+name = "t3_SetWatchLo_ovl"
+
+[[func]]
+vram = 0x00406B70
+name = "osPfsReadWriteFile"
+
+[[func]]
+vram = 0x00406FB0
+name = "osPfsRepairId"
+
+[[func]]
+vram = 0x00407160
+name = "osPfsFileState"
+
+[[func]]
+vram = 0x004073A0
+name = "osPfsAllocateFile"
+
+[[func]]
+vram = 0x00407744
+name = "__osPfsDeclearPage"
+
+[[func]]
+vram = 0x004079A0
+name = "osPfsInitPak"
+
+[[func]]
+vram = 0x00407B70
+name = "osPfsDeleteFile"
+
+[[func]]
+vram = 0x00407D9C
+name = "__osPfsReleasePages"
+
+[[func]]
+vram = 0x00408010
+name = "osPfsFreeBlocks"
+
+[[func]]
+vram = 0x00408400
+name = "__osRepairPackId"
+
+[[func]]
+vram = 0x004086E8
+name = "__osCheckPackId"
+
+[[func]]
+vram = 0x00408858
+name = "__osGetId"
+
+[[func]]
+vram = 0x00408A44
+name = "__osPfsRWInode"
+
+[[func]]
+vram = 0x00408D54
+name = "__osIdCheckSum"
+
+[[func]]
+vram = 0x00408D9C
+name = "__osCheckId"
+
+[[func]]
+vram = 0x00408E64
+name = "__osPfsSelectBank"
+
+[[func]]
+vram = 0x00408EC0
+name = "osPfsFindFile"
+
+[[func]]
+vram = 0x00409040
+name = "__osPfsRequestOneChannel"
+
+[[func]]
+vram = 0x00409220
+name = "osPfsChecker"
+
+[[func]]
+vram = 0x004097A8
+name = "__osPfsGetStatus"
+
+# Game code shaped like the debug monitor's __rmonHitCpuFault and the two it calls, which n64sym names so with their
+# relocated fields masked. N64Recomp takes those names for libultra the runtime replaces, so the game's own code was
+# never run and a pointer to the first one found no function. Each walks the four 0x224-byte records at 0x80131ED0.
+[[func]]
+vram = 0x00252414
+name = "t3_RecordsUpdate"
+
+[[func]]
+vram = 0x0025245C
+name = "t3_RecordsSet"
+
+[[func]]
+vram = 0x00418E78
+name = "t3_RecordsReset0"
+
+[[func]]
+vram = 0x00419008
+name = "t3_RecordsReset1"

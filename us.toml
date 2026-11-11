@@ -1,0 +1,120 @@
+# N64Recomp's configuration for Turok 3: Shadow of Oblivion (USA), SHA-1 a2e0a28dc0d3a48c7c02cb9e4c4b38fe04b2d436: it
+# reads the game's code out of the ROM by the symbols in syms/ (lib/turok-engine/tools/gen_syms.py and
+# syms/layout.toml, from the ROM alone) and writes RecompiledFuncs/ (tools/recompile.sh). The code runs through the TLB
+# (lib/turok-engine/docs/rom_layout.md), so the symbols' sections, and every address here, are the ones the code uses.
+[input]
+# The entry point the code is linked at: the header's 0x80000400, seen through TLB entry 31, which the entry point
+# itself sets up. The runtime starts there; the TLB writes are taken out below and the engine maps the views instead
+# (lib/turok-engine/src/tlb_views.cpp).
+entrypoint = 0x00200400
+# Paths are relative to this file.
+symbols_file_path = "syms/turok3.us.syms.toml"
+rom_file_path = "roms/turok3.us.z64"
+output_func_path = "RecompiledFuncs"
+use_absolute_symbols = true
+
+[patches]
+# Never run under the recompiler: they install, or are, the game's own exception layer and TLB-miss pager, or set up
+# the TLB and the watch registers, which the engine's TLB views replace (lib/turok-engine/src/tlb_views.cpp). Stubbed
+# (empty bodies) where something still calls them.
+stubs = [
+    "t3_SetTLBEntry",
+    "t3_MapTLB",
+    "t3_DumpTLB",
+    "t3_ReadTLBEntry",
+    "t3_SetWatchLo_main",
+    "t3_SetWatchLo_ovl",
+    "t3_MapMainTLB",
+    "t3_InstallExceptionVectors",
+    "t3_CacheFlush0",
+    "t3_CacheFlush1",
+    # libultra's ROM handle init with no callers; it uses osPiRawReadIo, which the runtime doesn't have.
+    "t3_PiRomHandleInit",
+]
+# Natives in their place.
+ignored = [
+    # The game's DMA thread calls osPiRawStartDma itself (lib/turok-engine/src/pi_dma.cpp).
+    "turok_pi_raw_start_dma",
+    # Maps ROM data into TLB space, which the game's pager fills on a TLB miss (lib/turok-engine/src/tlb_views.cpp).
+    "turok_vm_map_rom_region",
+    # osAiGetStatus, the audio thread's pace (lib/turok-engine/src/audio.cpp).
+    "turok_ai_get_status",
+    # osMotorInit, which answers as each port's accessory would (lib/turok-engine/src/controller_pak.cpp).
+    "turok_motor_init",
+    "t3_ExceptionVectors",
+    "t3_Exception",
+    "t3_ExceptionTail0",
+]
+
+# The entry point's cop0 and TLB instructions and its call to the TLB writer, and the `break` after its jalr to the
+# boot code: on a console that call never returns (the first osStartThread switches away for good), but the runtime's
+# osStartThread returns to the entry thread, which then ends. Every game of the engine has this entry point
+# (PaxDino's turokrw.us.toml).
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x0020040C
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x00200410
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x00200418
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x0020041C
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x00200420
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x00200428
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x0020043C
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x0020046C
+value = 0x00000000
+[[patches.instruction]]
+func = "recomp_entrypoint"
+vram = 0x00200484
+value = 0x00000000
+
+# The game's DMA thread waits for the PI interrupt it registers in t3_DmaInit (osSetEventMesg(OS_EVENT_PI, mq, 0x7D1)).
+# The runtime doesn't track OS_EVENT_PI, so the engine records it to post each DMA's completion
+# (lib/turok-engine/src/pi_dma.cpp).
+[[patches.hook]]
+func = "t3_DmaInit"
+before_vram = 0x0024346C
+text = "    { void turok_set_pi_event(uint8_t*, uint64_t, uint32_t); turok_set_pi_event(rdram, ctx->r5, 0x7D1); }"
+
+# libultra's osCreateViManager sets a default VI mode (__osViInit, NTSC LPN1), and the game relies on it: it waits for
+# retraces before it ever calls osViSetMode. The runtime's osCreateViManager sets none, and its VI thread sends no
+# retrace messages until a mode is set, so the same default (the game's own osViModeNtscLpn1, 0x8010BEC0) is set right
+# after the call.
+[[patches.hook]]
+func = "func_002844A8"
+before_vram = 0x002844CC
+text = "    { void osViSetMode(uint8_t*, int32_t); osViSetMode(rdram, (int32_t)0x8010BEC0); }"
+
+# t3_boot_main copies the 512 KB of the program after the first MB (ROM 0x101000 on) to 0x80100400 itself, with lw from
+# the cartridge bus (0xB0101000) in a loop, which the runtime has no mapping for. The engine's game copies it there
+# before the game runs (register_overlays.cpp), so the loop is jumped over: lui $a2, 0xB010 -> b 0x0020AB50.
+[[patches.instruction]]
+func = "t3_boot_main"
+vram = 0x0020AAFC
+value = 0x10000014
+
+# osClockRate (0x80171B40): libultra's osInitialize sets it, but the runtime's, which runs in its place, doesn't
+# (lib/turok-engine/src/pi_dma.cpp). Set right after the game's call.
+[[patches.hook]]
+func = "t3_boot_main"
+before_vram = 0x0020ABE0
+text = "    { void turok_set_clock_rate(uint8_t*, uint32_t); turok_set_clock_rate(rdram, 0x80171B40); }"
