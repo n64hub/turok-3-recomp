@@ -326,6 +326,9 @@ extern "C" void recomp_entrypoint(uint8_t* rdram, recomp_context* ctx);
 static void on_init(uint8_t* rdram, recomp_context* ctx) {
     turok::set_fpu_mode(ctx);
     t3::map_code_sections(rdram);
+    // The game's display list head (gDL), which every draw routine writes through: the engine's widescreen writes
+    // RT64's extended GBI there (lib/turok-engine/src/widescreen.cpp).
+    turok::set_display_list_head(0x80138230);
 }
 
 std::vector<recomp::GameEntry> supported_games = {
