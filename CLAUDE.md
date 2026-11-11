@@ -25,6 +25,9 @@ there, then move this repo's submodule onto the commit.
   apply to the other three. `runtime-patches/` are this game's own over them.
 - `tools/build_web.sh` and `tools/docker/Dockerfile.web`: the web page (`docs/web.md`), built with Emscripten in
   N64Recomp-browser's image. `RECOMP_KUSEG_WINDOW` (CMakeLists.txt) gives the TLB-mapped code its memory on the web.
+- `tools/release.sh` and `tools/docker/Dockerfile.linux`: the desktop releases for Windows and Linux (the script's header
+  says how). Each change a player would notice adds a line to `releases/next.md`; a release moves it to
+  `releases/v<version>.md`.
 - `icons/`: drawn by `tools/icon.ps1` from plain text and shapes.
 - Comments beside the code, for how and why: each file's header. Read the header of the file you change and update
   it in the same commit.
