@@ -1,0 +1,1 @@
+- Widescreen: in a window wider than 4:3 the level reaches the window's edges and the HUD sits at its sides (Aspect Ratio, on the Graphics settings; Original keeps the 4:3 picture)
