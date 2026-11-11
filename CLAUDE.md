@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-A static recompilation of the N64 *Turok 2: Seeds of Evil* (USA 1.0) with N64Recomp, N64ModernRuntime, RecompFrontend
+A static recompilation of the N64 *Turok 3: Shadow of Oblivion* (USA) with N64Recomp, N64ModernRuntime, RecompFrontend
 and RT64. No decompilation exists: the functions are found in the ROM. Almost all of it is written by AI agents, so
 this file is what the next one needs: the rules, where things are, and the facts about the game the code can't say on
 its own.
@@ -36,14 +36,20 @@ there, then move this repo's submodule onto the commit.
 
 ## Facts about the game
 
-- The boot code copies the first MB to 0x80000400 and the game maps it at 0x00200400 with a TLB entry; a second block
-  is mapped at 0x00400000. The GameEntry's entrypoint is the kseg0 address (`turok::boot_load_address`); the engine
-  opens the TLB pages and fills them (`turok::map_tlb_sections`).
-- The game runs its FPU in FR mode (`turok::set_fpu_mode`), maps ROM regions through its own VM server
-  (`turok_vm_map_rom_region`), runs its own PI DMA (`turok_pi_raw_start_dma`) and paces its audio thread by
-  osAiGetStatus (`turok_ai_get_status`).
-- It wants a Controller Pak in port 1 and asks osMotorInit about a Rumble Pak in each port (`turok_motor_init`):
-  without the first it stops on "Controller Pak not found".
+Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's facts hold with other addresses
+(`syms/names.toml` has Turok 2's names, found here by their code). Where it differs:
+
+- The program is longer than the MB the console's boot code copies: t3_boot_main copies the next 512 KB (ROM 0x101000
+  on) to 0x80100400 itself, word by word from the cartridge bus. The runtime can't read the bus, so
+  `t3::map_code_sections` makes that copy before the game runs and us.toml jumps over the loop. The code and data run
+  to 0x80114B60 (0x00314B60 through the TLB); bss follows.
+- The second block is the ROM straight after the program (0x115760, 0x4DF50 bytes), which t3_VmInit copies into the top
+  MB of an 8 MB console and maps at 0x00400000 with 1 MB pages, so the VM server hands out regions from 0x00500000.
+  It is text only; its data is in main's.
+- The rest is Turok 2's: the FPU in FR mode (`turok::set_fpu_mode`), the VM server (`turok_vm_map_rom_region`), the
+  DMA thread (`turok_pi_raw_start_dma`, OS_EVENT_PI with message 0x7D1), the audio pace (`turok_ai_get_status`), the
+  default VI mode the game waits on (osViModeNtscLpn1 at 0x8010BEC0), osClockRate (0x80171B40), a Controller Pak in
+  port 1 and osMotorInit for the Rumble Pak (`turok_motor_init`), and aspMain, byte for byte Turok 2's.
 - The finder's mistakes show up as a stack that doesn't balance: a function split in two leaves $sp short after the
-  call, and a crash far from it. A start found only by a jal in a data fragment split one function at its epilogue
-  (gen_syms now drops those). Check a new syms file for functions whose `addiu $sp` don't balance.
+  call, and a crash far from it. Thread entries that never return are the only functions that should be unbalanced
+  (the VM server and pager, the DMA, VI and PI managers' threads), and the exception code, which never runs.

@@ -44,7 +44,6 @@ ignored = [
     "t3_ExceptionVectors",
     "t3_Exception",
     "t3_ExceptionTail0",
-    "t3_ExceptionTail1",
 ]
 
 # The entry point's cop0 and TLB instructions and its call to the TLB writer, and the `break` after its jalr to the
