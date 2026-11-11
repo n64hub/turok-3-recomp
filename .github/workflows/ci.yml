@@ -115,7 +115,7 @@ jobs:
           cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release `
             -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl `
             -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache `
-            -DT2_PATCHES=OFF
+            -DT3_PATCHES=OFF
       # A first configure writes backslashed paths into the compile commands and every later one forward slashes, so a
       # build cached straight after a first configure would rebuild everything on the next run.
       - name: Configure again before a build that gets cached
