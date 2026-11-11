@@ -726,3 +726,22 @@ name = "osPfsChecker"
 [[func]]
 vram = 0x004097A8
 name = "__osPfsGetStatus"
+
+# Game code shaped like the debug monitor's __rmonHitCpuFault and the two it calls, which n64sym names so with their
+# relocated fields masked. N64Recomp takes those names for libultra the runtime replaces, so the game's own code was
+# never run and a pointer to the first one found no function. Each walks the four 0x224-byte records at 0x80131ED0.
+[[func]]
+vram = 0x00252414
+name = "t3_RecordsUpdate"
+
+[[func]]
+vram = 0x0025245C
+name = "t3_RecordsSet"
+
+[[func]]
+vram = 0x00418E78
+name = "t3_RecordsReset0"
+
+[[func]]
+vram = 0x00419008
+name = "t3_RecordsReset1"

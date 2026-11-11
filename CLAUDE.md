@@ -44,8 +44,15 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
   `t3::map_code_sections` makes that copy before the game runs and us.toml jumps over the loop. The code and data run
   to 0x80114B60 (0x00314B60 through the TLB); bss follows.
 - The second block is the ROM straight after the program (0x115760, 0x4DF50 bytes), which t3_VmInit copies into the top
-  MB of an 8 MB console and maps at 0x00400000 with 1 MB pages, so the VM server hands out regions from 0x00500000.
-  It is text only; its data is in main's.
+  MB of an 8 MB console and maps at 0x00400000 with 1 MB pages. The VM server hands out regions from 0x00800000:
+  the first one's pointers into itself (an audio bank's) are linked there. Its data is in main's but for a few tables
+  between its functions, and its functions sit end to end otherwise, so the layout calls it packed: gen_syms then
+  takes a few words of code between two functions as a start, and the game reaches some of them only through pointers.
+- Files are RNC-packed (method 1 or 2), and the unpacker is hand-written assembly entered at the delay slot of its
+  wrapper's `jr $ra`: a split there leaves every packed file as it was read, and the game crashes walking garbage.
+- Some small game functions have the shape of libultra's debug monitor (`__rmonHitCpuFault` and its two callees), and
+  n64sym names them so. N64Recomp then leaves them to the runtime, so `syms/names.toml` names them `t3_Records*`. A
+  "Failed to find function" at an address the syms have is a function under a name the runtime replaces.
 - The rest is Turok 2's: the FPU in FR mode (`turok::set_fpu_mode`), the VM server (`turok_vm_map_rom_region`), the
   DMA thread (`turok_pi_raw_start_dma`, OS_EVENT_PI with message 0x7D1), the audio pace (`turok_ai_get_status`), the
   default VI mode the game waits on (osViModeNtscLpn1 at 0x8010BEC0), osClockRate (0x80171B40), a Controller Pak in

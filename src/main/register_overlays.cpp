@@ -24,8 +24,8 @@ void t3::register_overlays() {
 }
 
 // The engine maps both code sections at their TLB addresses and fills them from the ROM (lib/turok-engine/src/
-// tlb_views.cpp), before the game runs. t3_VmInit maps the second block as 1 MB from 0x00400000, so the VM server
-// hands its ROM regions (the audio banks) out from 0x00500000 on.
+// tlb_views.cpp), before the game runs. The VM server hands its ROM regions (the audio banks) out from 0x00800000
+// on, past the second block at 0x00400000: the first region's pointers into itself are linked there.
 //
 // The runtime loads the first MB after the header at 0x80000400, as the console's boot code does, but the program is
 // longer: t3_boot_main copies the next 512 KB (ROM 0x101000 on) to 0x80100400 itself, reading the cartridge bus word by
@@ -33,5 +33,5 @@ void t3::register_overlays() {
 void t3::map_code_sections(uint8_t* rdram) {
     recomp::do_rom_read(rdram, (gpr)(int32_t)0x80100400u, 0x10101000u, 0x80000);
     turok::map_tlb_sections(rdram, section_table, ARRLEN(section_table));
-    turok::set_vm_base(0x00500000);
+    turok::set_vm_base(0x00800000);
 }

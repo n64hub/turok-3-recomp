@@ -16,8 +16,9 @@ The repo holds no ROM, no asset from the game and no data extracted from it: you
 git or CI is made from one except the symbol names, addresses and sizes in `syms/` and where the code is in the ROM
 (`syms/layout.toml`).
 
-**Status:** the whole game is recompiled; the desktop build is being brought up to play. The frame rate, widescreen,
-the controls' setup, a web page and releases are still to come.
+**Status:** the whole game is recompiled, and the desktop build plays from boot through the menus, the character
+choice and the opening scene into the first level, the Breach. The frame rate, widescreen, the controls' setup, a web
+page and releases are still to come.
 
 ## The ROM
 
