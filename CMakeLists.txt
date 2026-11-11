@@ -71,6 +71,11 @@ endif()
 include(${CMAKE_SOURCE_DIR}/runtime-patches/apply.cmake)
 t3_apply_patches()
 
+# The game's code runs from TLB-mapped addresses below 0x80000000 and reads its data there (lib/turok-engine's
+# docs/rom_layout.md): on every target the runtime opens those ranges (recomp::make_kuseg_accessible, which
+# turok::make_accessible calls), and on the web they lie in a 16 MB window after RDRAM. Before the runtime is added.
+add_compile_definitions(RECOMP_KUSEG_WINDOW)
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/lib/rt64 ${CMAKE_BINARY_DIR}/rt64)
 
 set(BUILD_SHARED_LIBS OFF)

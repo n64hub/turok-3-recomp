@@ -23,6 +23,8 @@ there, then move this repo's submodule onto the commit.
 - `lib/`: `turok-engine`, upstream `rt64`, `N64ModernRuntime` and `RecompFrontend` at the commits N64Recomp-browser's
   web forks are built on, and `N64Recomp-browser`, whose `patches/` `tools/build_n64recomp.sh` and `CMakeLists.txt`
   apply to the other three. `runtime-patches/` are this game's own over them.
+- `tools/build_web.sh` and `tools/docker/Dockerfile.web`: the web page (`docs/web.md`), built with Emscripten in
+  N64Recomp-browser's image. `RECOMP_KUSEG_WINDOW` (CMakeLists.txt) gives the TLB-mapped code its memory on the web.
 - `icons/`: drawn by `tools/icon.ps1` from plain text and shapes.
 - Comments beside the code, for how and why: each file's header. Read the header of the file you change and update
   it in the same commit.
