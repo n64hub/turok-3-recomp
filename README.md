@@ -16,9 +16,10 @@ The repo holds no ROM, no asset from the game and no data extracted from it: you
 git or CI is made from one except the symbol names, addresses and sizes in `syms/` and where the code is in the ROM
 (`syms/layout.toml`).
 
-**Status:** the whole game is recompiled, and the desktop build plays from boot through the menus, the character
-choice and the opening scene into the first level, the Breach. The frame rate, widescreen, the controls' setup, a web
-page and releases are still to come.
+**Status:** released for Windows and Linux (`releases/`). The desktop build plays from boot through the menus, the
+character choice and the opening scene into the first level, the Breach, with sound, and keyboard and gamepad input.
+The game hasn't been played past the Breach yet, and smooth motion, widescreen and mouse look are still to come. The
+same game plays in a browser through WebGPU, at [n64hub.com/turok-3](https://n64hub.com/turok-3/) (`docs/web.md`).
 
 ## The ROM
 
@@ -48,6 +49,12 @@ Start Game.
 
 `syms/` is written from the ROM by `python3 lib/turok-engine/tools/gen_syms.py` (it needs `pip install spimdisasm`);
 run it again only when the engine's finder or `syms/names.toml` changes.
+
+## Releases
+
+Each release is built where the ROM is, by `tools/release.sh` (its header says how), from the merge commit of a pull
+request titled "Release v<version>" that bumps `version_string` in `src/main/main.cpp` and moves `releases/next.md`,
+where each change adds what the player gets, to `releases/v<version>.md`, the release's notes.
 
 ## License
 
