@@ -3,6 +3,7 @@
 // Framerate (interpolation to the display's rate) and Aspect Ratio and HUD Placement (widescreen).
 
 #include <filesystem>
+#include <fstream>
 
 #include "recompinput/input_mapping.h"
 #include "recompinput/input_types.h"
@@ -70,6 +71,14 @@ void t3::init_config() {
     std::filesystem::path app_dir = recompui::file::get_app_folder_path();
     if (!app_dir.empty()) {
         std::filesystem::create_directories(app_dir);
+        // Mouse look on from the first start: RecompFrontend's Mouse Sensitivity defaults to 0, which turns it off (its
+        // default is for gyro mapped to the mouse). Where the General settings were never saved, they start with it at
+        // 50%; every other option is left out of the file and so at its default. A page reads its saved files in before
+        // this runs, so a player's own setting is never overwritten.
+        std::filesystem::path general = app_dir / "general.json";
+        if (!std::filesystem::exists(general)) {
+            std::ofstream(general) << "{ \"mouse_sensitivity\": 50 }\n";
+        }
     }
 
     recompui::config::GeneralTabOptions general_options{};

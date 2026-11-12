@@ -41,8 +41,8 @@ input. The game hasn't been played past the Breach yet. The same game plays in a
   | Map | Tab | top face button |
   | Pause | Enter | Start |
 
-  The mouse turns and looks as the right stick does (General, Mouse Sensitivity; 0 turns it off and leaves the cursor
-  free).
+  The mouse turns and looks as the right stick does, on from the first start (General, Mouse Sensitivity, 50%; 0
+  turns it off and leaves the cursor free). Settings saved by v0.1.x have it at 0: turn it up there.
 
 ## The ROM
 
