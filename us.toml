@@ -151,6 +151,15 @@ func = "func_0028EA30"
 before_vram = 0x0028F104
 text = "    { void turok_widen_culling(uint8_t*, uint32_t); turok_widen_culling(rdram, (uint32_t)ctx->r20 + 0x1E0); }"
 
+# The level's own culling (lib/turok-engine's docs/widescreen.md, 'The culling'). The camera's func_0028E8B8 (Turok 2's
+# is inline in its camera) has made its view pyramid at its stack's 0x18, the eye and four 4:3 far corners, and moves
+# it into the world here (func_002628E8, 5 points), taking the side planes and box the level's rooms are chosen
+# against from it: widened first.
+[[patches.hook]]
+func = "func_0028E8B8"
+before_vram = 0x0028E960
+text = "    { void turok_widen_frustum(uint8_t*, uint32_t, uint32_t); turok_widen_frustum(rdram, (uint32_t)ctx->r29 + 0x18, 5); }"
+
 # The menus' swirling backdrop (src/game/widescreen.cpp). The menu code (func_00414FD0: the boot screens, the title and
 # the menus) has built the swirl's float matrix at $a0, and converts it here for the display list (func_00260404,
 # guMtxF2L, into 0x80125630 and on), so a window wider than 16:9 widens it first.
