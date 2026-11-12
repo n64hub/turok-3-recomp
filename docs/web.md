@@ -76,7 +76,6 @@ about 300 a second, with no misses or errors and its sound short now and then. I
 
 The game sets a VI mode of its own whose origin is the framebuffer's start, not a row into it as libultra's modes put
 it. RT64 took the framebuffer shown to be a row before that, so no draw ended a game frame and the page showed four of
-the game's frames as one, 7.5 a second, until N64Recomp-browser v0.184.0 (its `docs/forks.md`, rt64 d49a689). Even
-then the page drew no frame between the game's (29 a second uncapped): RT64 interpolates a frame only when the
-framebuffer the VI shows is one it drew, which it found once the game's own mode had its origin moved a row in
-(`us.toml`, for the desktop's widescreen).
+the game's frames as one, 7.5 a second, until N64Recomp-browser v0.184.0 (its `docs/forks.md`, rt64 d49a689), and drew
+no frame between the game's (29 a second uncapped) until v0.186.0 (rt64 f5afe59): RT64 interpolates a frame only when
+the framebuffer the VI shows is one it drew, and it now takes that framebuffer at the origin everywhere.

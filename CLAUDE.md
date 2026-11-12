@@ -75,8 +75,11 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
   button into Z; `--input <file>` plays a scripted controller for tests (its comment says the format). The game looks
   down with the stick pushed up, as a plane's stick (seen on the page: the up arrow held looked at the floor), so the
   up arrow, the right stick and the mouse moved up push the stick down: up looks up.
+- The VI mode the game builds for itself (func_00406364) puts field 0's origin at the framebuffer's start, where
+  libultra's modes put it one row in. RT64 finds the framebuffer at that origin on N64Recomp-browser v0.186.0 and later
+  (its `docs/forks.md`, rt64 f5afe59); before that the desktop build showed the VI's RAM at 1x, never wider than 4:3.
 - Smooth motion is RT64's own (Framerate): it interpolates once it finds the framebuffer the VI shows among those the
-  game drew, which the VI origin hook above made possible.
+  game drew.
 - The finder's mistakes show up as a stack that doesn't balance: a function split in two leaves $sp short after the
   call, and a crash far from it. Thread entries that never return are the only functions that should be unbalanced
   (the VM server and pager, the DMA, VI and PI managers' threads), and the exception code, which never runs.
