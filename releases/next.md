@@ -1,3 +1,0 @@
-- Mouse look: the mouse turns and looks, and its left button fires. It is on from the first start (General, Mouse Sensitivity, 50%; 0 turns it off and leaves the cursor free); if you played v0.1.0 or v0.1.1, your saved settings have it at 0, so turn it up there
-- A shooter's controls, as Turok 2: Recompiled has them: WASD to walk and strafe, the mouse or the arrow keys to look, Space to jump, Q and E to change weapon, Tab for the map; on a controller, the two sticks, the right trigger to fire and the bottom face button or the left trigger to jump. All rebindable on the Controls tab
-- Smooth motion: RT64 draws the frames between the game's own at the display's rate (the Graphics tab's Framerate; Original shows the game's own)
