@@ -68,12 +68,15 @@ it is built behind the game, Firefox builds it with the game waiting, and both r
 
 ## How it plays
 
-By the plan on a desktop GPU, uncapped at 3840x2000, Chrome presents 29 a second, the game's own 30 (RT64 draws no
-frames between the game's for it yet), its longest frame gap 57 ms, with no shader waits, no misses and no WebGPU
-errors. Firefox waits for each section as the game reaches it (3.3 s for the boot's, 1 s for the Breach's) and plays
-with no misses or errors, at 30 a second in the menus and 15-25 in the Breach on a host busy with other work, its
-sound short now and then. Its runs are in N64Recomp-browser's `plays.jsonl` (`t3`).
+By the plan on a desktop GPU, uncapped at 3840x2000, Chrome presents about 340 a second, RT64 drawing the frames
+between the game's own 30, its longest frame gap under 20 ms, with no shader waits, no misses and no WebGPU errors.
+Firefox waits for each section as the game reaches it (3.3 s for the boot's, about 1 s for the Breach's) and presents
+about 300 a second, with no misses or errors and its sound short now and then. Its runs are in N64Recomp-browser's
+`plays.jsonl` (`t3`).
 
 The game sets a VI mode of its own whose origin is the framebuffer's start, not a row into it as libultra's modes put
 it. RT64 took the framebuffer shown to be a row before that, so no draw ended a game frame and the page showed four of
-the game's frames as one, 7.5 a second, until N64Recomp-browser v0.184.0 (its `docs/forks.md`, rt64 d49a689).
+the game's frames as one, 7.5 a second, until N64Recomp-browser v0.184.0 (its `docs/forks.md`, rt64 d49a689). Even
+then the page drew no frame between the game's (29 a second uncapped): RT64 interpolates a frame only when the
+framebuffer the VI shows is one it drew, which it found once the game's own mode had its origin moved a row in
+(`us.toml`, for the desktop's widescreen).
