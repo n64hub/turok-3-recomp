@@ -48,7 +48,7 @@ headers threads need) and open `Turok3Recompiled.html` in Chrome or Firefox with
 ## The plan
 
 `tools/play_plan.json` (about 2 minutes) reaches the first level the way a player does, by the keyboard's defaults
-(Enter is Start, Space A, the arrows the C buttons, which walk, WASD the stick, which turns, Q Z, which fires): Start
+(Enter is Start, WASD the C buttons, which walk, the arrows the stick, which turns, Left Ctrl Z, which fires): Start
 Game, then Start held 400 ms every 5 s through the legal screen, the logos, the title, New Game, the difficulty, the
 Rumble Pak notice and the opening scene to the character choice, Danielle and her scene. Its waits are the browser's
 time, since nothing tells the plan where the game is, and Start is held rather than tapped because the game reads its
