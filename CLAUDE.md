@@ -66,6 +66,11 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
   in `us.toml`: the frame (func_00285424) starts its display list, whose head is the pointer at 0x80138230, and ends
   it; the HUD's rectangles are func_0028D318's; the camera (func_0028EA30) keeps its view-projection matrix as floats
   at +0x1E0 of its struct, which the culling reads.
+- The keyboard and mouse are Turok 2's: `src/game/config.cpp` binds a shooter's layout to the game's C buttons
+  (walking), stick (looking), Z (fire) and R (jump), and `src/main/main.cpp` turns the mouse into the stick and its left
+  button into Z; `--input <file>` plays a scripted controller for tests (its comment says the format).
+- Smooth motion is RT64's own (Framerate): it interpolates once it finds the framebuffer the VI shows among those the
+  game drew, which the VI origin hook above made possible.
 - The finder's mistakes show up as a stack that doesn't balance: a function split in two leaves $sp short after the
   call, and a crash far from it. Thread entries that never return are the only functions that should be unbalanced
   (the VM server and pager, the DMA, VI and PI managers' threads), and the exception code, which never runs.

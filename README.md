@@ -17,11 +17,32 @@ git or CI is made from one except the symbol names, addresses and sizes in `syms
 (`syms/layout.toml`).
 
 **Status:** released for Windows and Linux (`releases/`). The desktop build plays from boot through the menus, the
-character choice and the opening scene into the first level, the Breach, with sound, and keyboard and gamepad input.
-In a window wider than 4:3 the level reaches the window's edges and the HUD sits at its sides (Aspect Ratio, on the
-Graphics settings). The game hasn't been played past the Breach yet, and smooth motion and mouse look are still to
-come. The same game plays in a browser through WebGPU, at [n64hub.com/turok-3](https://n64hub.com/turok-3/)
-(`docs/web.md`).
+character choice and the opening scene into the first level, the Breach, with sound, and keyboard, mouse and gamepad
+input. The game hasn't been played past the Breach yet. The same game plays in a browser through WebGPU, at
+[n64hub.com/turok-3](https://n64hub.com/turok-3/) (`docs/web.md`).
+
+## Playing
+
+- **Widescreen:** in a window wider than 4:3 the level reaches the window's edges and its HUD sits at the window's
+  sides (Aspect Ratio, on the Graphics tab; lib/turok-engine's `docs/widescreen.md`). The game culls what's outside
+  its view; that view is widened to 21:9, so in a window wider than that the outer edges may show things appearing
+  late.
+- **Smooth motion:** the game runs at its own rate and RT64 draws the frames in between at the display's (the Graphics
+  tab's Framerate; Original shows the game's own).
+- **Controls**, all rebindable on the Controls tab:
+
+  | | Keyboard and mouse | Controller |
+  |---|---|---|
+  | Move and strafe | W A S D | left stick |
+  | Look | mouse, or the arrow keys | right stick |
+  | Fire | left mouse button, or Left Ctrl | right trigger |
+  | Jump | Space | bottom face button, or the left trigger |
+  | Change weapon | Q and E | the shoulder buttons |
+  | Map | Tab | top face button |
+  | Pause | Enter | Start |
+
+  The mouse turns and looks as the right stick does, on from the first start (General, Mouse Sensitivity, 50%; 0
+  turns it off and leaves the cursor free). Settings saved by v0.1.x have it at 0: turn it up there.
 
 ## The ROM
 
