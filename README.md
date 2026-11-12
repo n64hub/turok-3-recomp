@@ -18,8 +18,10 @@ git or CI is made from one except the symbol names, addresses and sizes in `syms
 
 **Status:** released for Windows and Linux (`releases/`). The desktop build plays from boot through the menus, the
 character choice and the opening scene into the first level, the Breach, with sound, and keyboard and gamepad input.
-The game hasn't been played past the Breach yet, and smooth motion, widescreen and mouse look are still to come. The
-same game plays in a browser through WebGPU, at [n64hub.com/turok-3](https://n64hub.com/turok-3/) (`docs/web.md`).
+In a window wider than 4:3 the level reaches the window's edges and the HUD sits at its sides (Aspect Ratio, on the
+Graphics settings). The game hasn't been played past the Breach yet, and smooth motion and mouse look are still to
+come. The same game plays in a browser through WebGPU, at [n64hub.com/turok-3](https://n64hub.com/turok-3/)
+(`docs/web.md`).
 
 ## The ROM
 

@@ -62,6 +62,10 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
   DMA thread (`turok_pi_raw_start_dma`, OS_EVENT_PI with message 0x7D1), the audio pace (`turok_ai_get_status`), the
   default VI mode the game waits on (osViModeNtscLpn1 at 0x8010BEC0), osClockRate (0x80171B40), a Controller Pak in
   port 1 and osMotorInit for the Rumble Pak (`turok_motor_init`), and aspMain, byte for byte Turok 2's.
+- Widescreen (lib/turok-engine's `docs/widescreen.md`) hooks Turok 2's places, found by their code, each with a comment
+  in `us.toml`: the frame (func_00285424) starts its display list, whose head is the pointer at 0x80138230, and ends
+  it; the HUD's rectangles are func_0028D318's; the camera (func_0028EA30) keeps its view-projection matrix as floats
+  at +0x1E0 of its struct, which the culling reads.
 - The finder's mistakes show up as a stack that doesn't balance: a function split in two leaves $sp short after the
   call, and a crash far from it. Thread entries that never return are the only functions that should be unbalanced
   (the VM server and pager, the DMA, VI and PI managers' threads), and the exception code, which never runs.
