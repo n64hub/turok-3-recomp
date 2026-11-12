@@ -1,1 +1,0 @@
-- Up looks up: moving the mouse up, the up arrow and the right stick pushed up now look up; in v0.2.0 they looked down, since the game looks down with its stick pushed up, as a plane's stick does
