@@ -38,8 +38,10 @@ input. The game hasn't been played past the Breach yet. The same game plays in a
   | Fire | left mouse button, or Left Ctrl | right trigger |
   | Jump | Space | bottom face button, or the left trigger |
   | Change weapon | Q and E | the shoulder buttons |
-  | Map | Tab | top face button |
+  | Sniper mode, on a weapon that has one | Tab | top face button |
   | Pause | Enter | Start |
+
+  The game has no map: the N64's L, on Tab, toggles sniper mode; so does the D-pad's Right, on the L key.
 
   The mouse turns and looks as the right stick does, on from the first start (General, Mouse Sensitivity, 50%; 0
   turns it off and leaves the cursor free). Settings saved by v0.1.x have it at 0: turn it up there.
