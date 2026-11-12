@@ -12,10 +12,11 @@
 #include "turok3.h"
 
 // The game walks and strafes on the C buttons and turns and looks with the control stick; Z fires, R jumps, A and B
-// change weapon and L shows the map. Here that is the layout a shooter has today: walking on the left stick (and
-// WASD), looking on the right stick (and the arrow keys, and the mouse: src/main/main.cpp), firing on the right
-// trigger (and the left mouse button), jumping on the bottom face button (and Space), the weapons on the shoulder
-// buttons (Q and E) and the map on the top face button (Tab). The game looks down with the stick pushed up, as a
+// change weapon and L toggles sniper mode on a weapon that has one, as Right and Left on the D-pad do (its manual's
+// controls page). It has no map, unlike Turok 1 and 2, where L shows one. Here that is the layout a shooter has today:
+// walking on the left stick (and WASD), looking on the right stick (and the arrow keys, and the mouse:
+// src/main/main.cpp), firing on the right trigger (and the left mouse button), jumping on the bottom face button (and
+// Space), the weapons on the shoulder buttons (Q and E) and sniper mode on the top face button (Tab). The game looks down with the stick pushed up, as a
 // plane's stick, so the up arrow and the right stick pushed up push the game's stick down: up looks up.
 static void set_default_bindings() {
     using recompinput::GameInput;
