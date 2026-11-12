@@ -2,3 +2,4 @@
 - In widescreen the picture reaches the window's right edge (a black strip down it is gone), the opening scene's black bars cover the whole width at 21:9 with no black lines down the picture between them, and the black strip along the bottom edge is thinner.
 - In a window wider than 16:9, the swirl behind the boot screens, the title and the menus reaches the window's edges: its corners and sides are no longer black.
 - In a window up to 21:9 wide the level's rooms at the picture's sides are drawn: the view the game picks the rooms to draw by is widened too, not only the one it culls models against.
+- In widescreen the on-screen messages stay whole in the middle of the window: the Breach's "New Objective" no longer comes apart, its two halves at the window's sides (or with a gap between them at 4:3).

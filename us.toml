@@ -143,6 +143,32 @@ func = "func_0028D318"
 before_vram = 0x0028D5DC
 text = "    { void turok_hud_end(uint8_t*); turok_hud_end(rdram); }"
 
+# The messages, drawn in the middle of the HUD (func_002CB7FC, from func_0028D318 by way of func_002D523C) and left out
+# of it: lines of letters centred on the screen, which the HUD's automatic anchoring would take apart by where each
+# letter sits. The Breach's "New Objective / Get to the breach and stop Oblivion", in the screen's top quarter, had its
+# left letters at the window's left and its right ones at the right. func_00214C3C draws the message the player's
+# +0xEBC times, func_00214FC0 the one +0xEC8 holds; each is closed out of the HUD from its start to its one jr $ra, so
+# it's drawn as at 4:3, centred in the window.
+[[patches.hook]]
+func = "func_00214C3C"
+before_vram = 0x00214C3C
+text = "    { void turok_hud_end(uint8_t*); turok_hud_end(rdram); }"
+
+[[patches.hook]]
+func = "func_00214C3C"
+before_vram = 0x00214FB8
+text = "    { void turok_hud_begin(uint8_t*); turok_hud_begin(rdram); }"
+
+[[patches.hook]]
+func = "func_00214FC0"
+before_vram = 0x00214FC0
+text = "    { void turok_hud_end(uint8_t*); turok_hud_end(rdram); }"
+
+[[patches.hook]]
+func = "func_00214FC0"
+before_vram = 0x002151F4
+text = "    { void turok_hud_begin(uint8_t*); turok_hud_begin(rdram); }"
+
 # The camera (func_0028EA30, Turok 2's func_0027D160) has made its float view-projection matrix (+0x1E0 of its struct,
 # s4) and the display list's copy of it (func_0025FE24, guMtxF2L): widened from here for the culling, which reads the
 # float one.
