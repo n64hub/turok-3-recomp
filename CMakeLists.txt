@@ -348,6 +348,14 @@ endif()
 
 set(RECOMP_FRONTEND_N64MODERNRUNTIME_PATH ${CMAKE_SOURCE_DIR}/lib/N64ModernRuntime)
 set(RECOMP_FRONTEND_RT64_PATH ${CMAKE_SOURCE_DIR}/lib/rt64)
+# The game turns RecompFrontend's single-player mode off, so that its multiplayer has a port for each player
+# (src/main/main.cpp), and plays as single-player mode until players are assigned, as with Emscripten: a player alone
+# needn't assign their pad or keyboard first.
+set(RECOMPINPUT_SINGLE_PLAYER_UNTIL_ASSIGNED ON CACHE BOOL "" FORCE)
+# And until then each pad plays a port of its own, in the order they were connected, the keyboard port 1
+# (RecompFrontend-web's option): four people with four pads play four players without assigning them, where every pad
+# would play port 1.
+set(RECOMPINPUT_PADS_IN_ORDER ON CACHE BOOL "" FORCE)
 add_subdirectory(${CMAKE_SOURCE_DIR}/lib/RecompFrontend)
 
 if (T3_PATCHES)

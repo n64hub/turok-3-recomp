@@ -92,18 +92,22 @@ ultramodern::gfx_callbacks_t::gfx_data_t create_gfx() {
     return {};
 }
 
-// One player: port 1 has a controller, any pad or the keyboard, with a pak in it. Turok 3 reads the controllers'
-// status for a pak before it opens its Controller Pak save, and with none it stops on "Controller Pak not found".
-// ultramodern reports a pak for any Pak but None, and RumblePak is the only other it has; which pak the game finds is
-// the engine's (lib/turok-engine/src/controller_pak.cpp, a Controller Pak in port 1).
+// Up to four players, each on a port of their own, as on a console: until players are assigned (the controls page's
+// Assign players) port 1 has a controller, the keyboard's and the first pad's, and so has each port a pad is connected
+// for (RECOMPINPUT_PADS_IN_ORDER: the second pad connected plays port 2, and so on); once they are, each assigned
+// player's port. The game offers its multiplayer players for those ports alone.
+// Port 1 has a pak in it: Turok 3 reads the controllers' status for a pak before it opens its Controller Pak save, and
+// with none it stops on "Controller Pak not found". ultramodern reports a pak for any Pak but None, and RumblePak is
+// the only other it has; which pak the game finds is the engine's (lib/turok-engine/src/controller_pak.cpp, a
+// Controller Pak in port 1 and nothing in the others).
 ultramodern::input::connected_device_info_t get_connected_device_info(int controller_num) {
-    if (recompinput::players::is_single_player_mode() || recompinput::players::get_player_is_assigned(controller_num)) {
-        if (controller_num == 0) {
-            return ultramodern::input::connected_device_info_t{
-                .connected_device = ultramodern::input::Device::Controller,
-                .connected_pak = ultramodern::input::Pak::RumblePak,
-            };
-        }
+    bool unassigned = recompinput::players::get_number_of_assigned_players() == 0;
+    if ((unassigned && (controller_num == 0 || (size_t)controller_num < recompinput::get_detected_controller_count())) ||
+        recompinput::players::get_player_is_assigned(controller_num)) {
+        return ultramodern::input::connected_device_info_t{
+            .connected_device = ultramodern::input::Device::Controller,
+            .connected_pak = controller_num == 0 ? ultramodern::input::Pak::RumblePak : ultramodern::input::Pak::None,
+        };
     }
 
     return ultramodern::input::connected_device_info_t{
@@ -541,8 +545,12 @@ int main(int argc, char** argv) {
     t3::register_overlays();
     t3::register_patches();
 
-    // One player, on any pad or the keyboard.
-    recompinput::players::set_single_player_mode(true);
+    // Up to four players, each assigned a pad (or the keyboard) on the controls page's Assign players, which is then
+    // their own port (get_connected_device_info). Until players are assigned each pad plays a port of its own in the
+    // order the pads were connected and the keyboard plays port 1, with RECOMPINPUT_SINGLE_PLAYER_UNTIL_ASSIGNED and
+    // RECOMPINPUT_PADS_IN_ORDER (CMakeLists.txt): one player plays on any pad or the keyboard, as before.
+    recompinput::players::set_single_player_mode(false);
+    recompinput::players::set_player_count_range(1, 4);
 
     t3::init_config();
 
