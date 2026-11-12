@@ -68,7 +68,7 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
   port 1 and osMotorInit for the Rumble Pak (`turok_motor_init`), and aspMain, byte for byte Turok 2's.
 - Widescreen (lib/turok-engine's `docs/widescreen.md`) hooks Turok 2's places, found by their code, each with a comment
   in `us.toml`: the frame (func_00285424) starts its display list, whose head is the pointer at 0x80138230, and ends
-  it; the HUD's rectangles are func_0028D318's; the camera (func_0028EA30) keeps its view-projection matrix as floats
+  it; the HUD's rectangles are func_0028D318's, but for its messages (func_00214C3C, func_00214FC0), closed out of it; the camera (func_0028EA30) keeps its view-projection matrix as floats
   at +0x1E0 of its struct, which the culling reads. One is Turok 3's own (`src/game/widescreen.cpp`): the boot screens,
   the title and the menus are func_00414FD0's, in the second block, which draws their swirling backdrop as a 3D mesh
   that covers no more than 16:9 and converts its float matrix at 0x00415634, where a wider window widens it.
