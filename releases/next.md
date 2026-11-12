@@ -1,1 +1,3 @@
 - The renderer finds the picture where the game's own video mode points, so the game's video mode is left as it set it, no longer moved a row to make it findable.
+- In widescreen the picture reaches the window's right edge (a black strip down it is gone), the opening scene's black bars cover the whole width at 21:9 with no black lines down the picture between them, and the black strip along the bottom edge is thinner.
+- In a window wider than 16:9, the swirl behind the boot screens, the title and the menus reaches the window's edges: its corners and sides are no longer black.

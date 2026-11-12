@@ -192,6 +192,7 @@ target_sources(Turok3Recompiled PRIVATE
     ${CMAKE_SOURCE_DIR}/src/main/register_overlays.cpp
     ${CMAKE_SOURCE_DIR}/src/game/config.cpp
     ${CMAKE_SOURCE_DIR}/src/game/recomp_api.cpp
+    ${CMAKE_SOURCE_DIR}/src/game/widescreen.cpp
     # The engine the Turok games share (lib/turok-engine/README.md).
     ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/audio.cpp
     ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/controller_pak.cpp

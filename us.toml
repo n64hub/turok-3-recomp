@@ -150,3 +150,11 @@ text = "    { void turok_hud_end(uint8_t*); turok_hud_end(rdram); }"
 func = "func_0028EA30"
 before_vram = 0x0028F104
 text = "    { void turok_widen_culling(uint8_t*, uint32_t); turok_widen_culling(rdram, (uint32_t)ctx->r20 + 0x1E0); }"
+
+# The menus' swirling backdrop (src/game/widescreen.cpp). The menu code (func_00414FD0: the boot screens, the title and
+# the menus) has built the swirl's float matrix at $a0, and converts it here for the display list (func_00260404,
+# guMtxF2L, into 0x80125630 and on), so a window wider than 16:9 widens it first.
+[[patches.hook]]
+func = "func_00414FD0"
+before_vram = 0x00415634
+text = "    { void t3_widen_menu_backdrop(uint8_t*, uint32_t); t3_widen_menu_backdrop(rdram, (uint32_t)ctx->r4); }"
