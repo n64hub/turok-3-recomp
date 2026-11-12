@@ -1,0 +1,1 @@
+- The renderer finds the picture where the game's own video mode points, so the game's video mode is left as it set it, no longer moved a row to make it findable.
