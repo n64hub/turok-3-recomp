@@ -198,6 +198,7 @@ target_sources(Turok3Recompiled PRIVATE
     ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/controller_pak.cpp
     ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/libultra.cpp
     ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/pi_dma.cpp
+    ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/render_to_ram.cpp
     ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/tlb_views.cpp
     ${CMAKE_SOURCE_DIR}/lib/turok-engine/src/widescreen.cpp
 )
