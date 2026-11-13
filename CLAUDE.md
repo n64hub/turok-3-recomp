@@ -77,7 +77,8 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
   (walking), stick (looking), Z (fire) and R (jump), and `src/main/main.cpp` turns the mouse into the stick and its left
   button into Z; `--input <file>` plays a scripted controller for tests (its comment says the format). The game looks
   down with the stick pushed up, as a plane's stick (seen on the page: the up arrow held looked at the floor), so the
-  up arrow, the right stick and the mouse moved up push the stick down: up looks up.
+  up arrow, the right stick and the mouse moved up push the stick down: up looks up. The menus read the stick too, as
+  direction bits, which us.toml swaps back so that up moves their cursor up.
 - The VI mode the game builds for itself (func_00406364) puts field 0's origin at the framebuffer's start, where
   libultra's modes put it one row in. RT64 finds the framebuffer at that origin on N64Recomp-browser v0.186.0 and later
   (its `docs/forks.md`, rt64 f5afe59); before that the desktop build showed the VI's RAM at 1x, never wider than 4:3.
