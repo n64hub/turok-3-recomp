@@ -47,12 +47,13 @@ headers threads need) and open `Turok3Recompiled.html` in Chrome or Firefox with
 
 ## The plan
 
-`tools/play_plan.json` (about 2 minutes) reaches the first level the way a player does, by the keyboard's defaults
+`tools/play_plan.json` (about 2.5 minutes) reaches the first level the way a player does, by the keyboard's defaults
 (Enter is Start, WASD the C buttons, which walk, the arrows the stick, which turns, Left Ctrl Z, which fires): Start
 Game, then Start held 400 ms every 5 s through the legal screen, the logos, the title, New Game, the difficulty, the
 Rumble Pak notice and the opening scene to the character choice, Danielle and her scene. Its waits are the browser's
 time, since nothing tells the plan where the game is, and Start is held rather than tapped because the game reads its
-pad a few times a second while it loads. Then it walks, turns and fires in the Breach for 25 s. Play it with
+pad a few times a second while it loads. Then it plays 70 s in the Breach: it walks, strafes, turns and fires
+out and back about the spot the level starts on, three times, and opens and closes the pause menu. Play it with
 N64Recomp-browser's `tools/play_page.mjs` (its `docs/playing.md`).
 
 ## The shader list
