@@ -12,8 +12,9 @@
 # tells it where the game is. Then the Breach, the first level, reached by choosing Danielle and skipping her scene,
 # walked (the C buttons), turned (the stick) and fired in for 25 s. The plan's last section, pause, goes into section
 # 0: the pause menu, which comes up in any level, and its Save Game screen. Not recorded: the rest of the Breach, the
-# other levels, Joseph and Deathmatch. Flags follow settings (filtering, HDR, MSAA, upscaling), so a change to one of
-# those defaults means recording again.
+# other levels, Joseph and Deathmatch. The Breach section's last line is one the regular play (tools/play_plan.json, 70 s
+# there) missed, added by hand. Flags follow settings (filtering, HDR, MSAA, upscaling), so a change to one of those
+# defaults means recording again.
 00504240 00082cff fcffffff fffdf6fb 0800000b
 0c1849d8 0018ec4f fc309604 5ffefff8 088a000e
 00504240 00102c4f fc511bff 3ffdfe38 084e142b
@@ -70,3 +71,4 @@ c8112478 0018ac5f fc1217ff fffffe38 088a000a
 0c184a50 0018ec4f fcffffff fffe793c 0800000a
 00504340 00002c5f fcffffff fffdf6fb 0800000b
 00504240 00002c5f fcffffff fffdf6fb 0800000b
+00504240 0008ac5f fcffffff fffdf6fb 0800000b
