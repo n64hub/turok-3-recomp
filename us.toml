@@ -208,3 +208,14 @@ value = 0x3C020001
 func = "func_00251960"
 vram = 0x002519BC
 value = 0x3C020008
+
+# Mouse look (lib/turok-engine/src/mouse_look.cpp): the mouse turns the view itself instead of being added to the stick.
+# The player's look on foot (func_002CF978, Turok 2's func_0024EF70: its struct in s0, its object in s2, the limits of
+# its pitch at +0x10 and +0x14 of the table in s1) has just turned the yaw (the object's +0x6C, radians, growing to the
+# right) and is about to move the pitch (+0xDD0, radians, growing upwards) towards a target it makes of the stick, in a1,
+# so that the look springs back level when the stick is let go: the engine adds the mouse's movement to both and holds
+# the target.
+[[patches.hook]]
+func = "func_002CF978"
+before_vram = 0x002CFBF4
+text = "    { void turok_mouse_look(uint8_t*, uint32_t, float, uint32_t, float, gpr*, float, float); union { int32_t i; float f; } lo = { MEM_W(0x10, ctx->r17) }, hi = { MEM_W(0x14, ctx->r17) }; turok_mouse_look(rdram, (uint32_t)ctx->r18 + 0x6C, 1.0f, (uint32_t)ctx->r16 + 0xDD0, 1.0f, &ctx->r5, lo.f, hi.f); }"
