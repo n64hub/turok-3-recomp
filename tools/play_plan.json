@@ -1,5 +1,6 @@
 {
  "page": "Turok3Recompiled.html",
+ "padKeys": { "ControlLeft": 7, "Tab": 3, "KeyE": 5, "KeyQ": 4 },
  "header": [
   "The page's plan for N64Recomp-browser's tools/play_page.mjs, its regular play of about 2.5 minutes: the launcher, Load",
   "ROM on a new profile once the shader list Chrome builds behind it is done (Firefox builds none there and says so), Start",
@@ -8,7 +9,9 @@
   "Breach, the first level, as a player does. The plan's waits are the browser's time: nothing tells it where the game",
   "is, so a press that comes while the game loads waits for the next. The play is 70 s in the Breach: three sways out",
   "and back about the spot the level starts on, walking (the C buttons, W and S), strafing (A and D), turning (the stick,",
-  "the arrows) and firing (Z, Left Ctrl), with the pause menu opened and closed (Start, Enter) after the second."
+  "the arrows) and firing (Z, Left Ctrl), with the pause menu opened and closed (Start, Enter) after the second.",
+  "With --pad its padKeys are the pad buttons this game gives its keys (src/game/config.cpp): Left Ctrl is Z, the right",
+  "trigger; Tab is L, North; E is A, the right shoulder; Q is B, the left."
  ],
  "load": [
   [
