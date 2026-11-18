@@ -13,8 +13,9 @@
 # walked (the C buttons), turned (the stick) and fired in for 25 s. The plan's last section, pause, goes into section
 # 0: the pause menu, which comes up in any level, and its Save Game screen. Not recorded: the rest of the Breach, the
 # other levels, Joseph and Deathmatch. The Breach section's last line is one the regular play (tools/play_plan.json, 70 s
-# there) missed, added by hand. Flags follow settings (filtering, HDR, MSAA, upscaling), so a change to one of those
-# defaults means recording again.
+# there) missed, added by hand, and so is section 0's last line, which the plan's way to the Breach (its start) missed
+# twice in Chrome, about 25 s into the presses. Flags follow settings (filtering, HDR, MSAA, upscaling), so a change to
+# one of those defaults means recording again.
 00504240 00082cff fcffffff fffdf6fb 0800000b
 0c1849d8 0018ec4f fc309604 5ffefff8 088a000e
 00504240 00102c4f fc511bff 3ffdfe38 084e142b
@@ -42,6 +43,7 @@ c8113078 0018ac4f fc1217ff fffffe38 0aaaaa0e
 00504240 00002cff fcffffff fffdf6fb 0800000b
 00504240 00082c4f fcffffff fffdf6fb 0800000b
 0c1841f8 0018ac4f fc1217ff ff17fe3f 088a000a
+c81049d8 0018ac4f fc327fff fffff638 0800000e
 section breach
 c8112478 00182c4f fc327fff fffff638 0800000e
 00504240 00000cff fcffffff fffdf6fb 0800000b
