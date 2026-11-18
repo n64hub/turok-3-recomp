@@ -9,8 +9,7 @@ What is the game's own stays here: the `EMSCRIPTEN` branches of `CMakeLists.txt`
 `tools/build_web.sh`, the prebuilt shader list (`src/rt64_shaders.txt`, recorded by `tools/shader_plan.json`; the
 list's header says how to record it again) and the play plan (`tools/play_plan.json`). The rest is N64Recomp-browser's:
 `docs/porting.md` (WebGPU and the shaders, prebuilt shader lists, Emscripten), `docs/playing.md` (playing and measuring
-a page), `docs/forks.md` and `docs/findings.md`. Every play of this game's page is a line in N64Recomp-browser's
-`plays.jsonl` (game `t3`), never a record here.
+a page), `docs/forks.md` and `docs/findings.md`.
 
 ## The TLB-mapped code
 
@@ -72,8 +71,7 @@ it is built behind the game, Firefox builds it with the game waiting, and both r
 By the plan on a desktop GPU, uncapped at 3840x2000, Chrome presents about 340 a second, RT64 drawing the frames
 between the game's own 30, its longest frame gap under 20 ms, with no shader waits, no misses and no WebGPU errors.
 Firefox waits for each section as the game reaches it (3.3 s for the boot's, about 1 s for the Breach's) and presents
-about 300 a second, with no misses or errors and its sound short now and then. Its runs are in N64Recomp-browser's
-`plays.jsonl` (`t3`).
+about 300 a second, with no misses or errors and its sound short now and then.
 
 The game sets a VI mode of its own whose origin is the framebuffer's start, not a row into it as libultra's modes put
 it. RT64 took the framebuffer shown to be a row before that, so no draw ended a game frame and the page showed four of
