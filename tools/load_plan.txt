@@ -1,0 +1,28 @@
+# The load run of the save check (README.md), after tools/save_plan.txt, the program started again in the same
+# folder: at the title menu (0x80125E1C = 1), Down to LOAD GAME and Start open the slots, A on the saved one, Up to YES
+# and A, and A on the Rumble Pak notice load it. The checkpoint's health (the halfword at [[0x80100404]]+0x1C) is then
+# 77 only if it came off the save: a new game has 100 there, and the save run set it to 77 before it saved. Nothing is
+# written by then. Back in play (0x801252C4 = 6), the health is set to 78 and the pause menu's SAVE GAME saves again
+# with A on the next empty slot, through the check's links.
+0 until 0x80125E1C 0xFFFFFFFF 1 120
+2 key Down 100
+2.6 key Enter 100
+4.5 shot slots
+5 key E 100
+6.5 key Up 100
+7.1 key E 100
+9 shot rumble
+9.5 key E 100
+10 until [[0x80100404]]+0x1C 0xFFFFFFFF 0x4D00 60
+10.5 saves same
+11 until 0x801252C4 0xFFFFFFFF 6 60
+13 shot loaded
+14 poke [[0x80100404]]+0x1C 0x4E00
+14.5 key Enter 100
+16 key Down 100
+16.6 key E 100
+18.5 shot slots2
+19 key E 100
+19.5 saves changed 15
+21.5 shot saved
+22 end
