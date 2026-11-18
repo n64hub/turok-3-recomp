@@ -1,1 +1,0 @@
-- With a gamepad, looking up and down with the right stick (and the arrow keys) now moves the view at once, at a speed set by how far the stick is pushed, and the view stays where you leave it. Before, the view eased slowly towards the stick's angle and sprang back level as soon as the stick was let go, so an aim up or down couldn't be held.
