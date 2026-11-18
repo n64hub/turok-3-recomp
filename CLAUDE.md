@@ -32,7 +32,7 @@ there, then move this repo's submodule onto the commit.
 - `tools/release.sh` and `tools/docker/Dockerfile.linux`: the desktop releases for Windows and Linux (the script's header
   says how). Each change a player would notice adds a line to `releases/next.md`; a release moves it to
   `releases/v<version>.md`. Every fix is released: the work that lands one cuts the release once it merges, unasked,
-  or waits for one already in flight, which carries it (N64Recomp-browser's CLAUDE.md, Releasing).
+  or waits for one already in flight, which carries it.
 - `icons/`: drawn by `tools/icon.ps1` from plain text and shapes.
 - Comments beside the code, for how and why: each file's header. Read the header of the file you change and update
   it in the same commit.
