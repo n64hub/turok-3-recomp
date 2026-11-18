@@ -74,6 +74,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(RT64_STATIC TRUE)
 set(RT64_SDL_WINDOW_VULKAN TRUE)
+# The page's pairing options, on here too. A Turok level is blocks, each a mesh that never changes: without
+# RT64_SKIP_PLACE_SWAPS a block that came into view or took another level of detail could be paired with one that left,
+# in the frames RT64 draws between the game's, and was drawn partway from that one's place (slabs of cliff over the sky,
+# the background through holes at the picture's edge). RT64_SKIP_CAMERA_CUTS draws a cut to another shot as it is, not
+# halfway between the two, and RT64_SKIP_COLLAPSED_MATCHES never interpolates an object the game hides.
+set(RT64_SKIP_PLACE_SWAPS ON)
+set(RT64_SKIP_CAMERA_CUTS ON)
+set(RT64_SKIP_COLLAPSED_MATCHES ON)
 add_compile_definitions(HLSL_CPU)
 
 if (WIN32 AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
