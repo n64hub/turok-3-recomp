@@ -1,0 +1,84 @@
+# Turok 3's soak plan: one round through the game's modes and scenes for the desktop soak, a play of its Linux build by
+# this plan for 180 s that fails on a crash, the program exiting or the picture standing still for 10 s. Each line is a
+# step at seconds since the program started: key <name> [ms held], down and up <name>, shot <name>, until <addr> <mask>
+# <value> <timeout s> [key [ms [every s]]] (waits until the game's 32-bit word at addr, anded with mask, is value,
+# pressing key, held ms (120), every s (1.5) meanwhile; the later steps move on by the wait, and a wait unmet fails the
+# play), and random <key>,... (one of them every 0.3-1.2 s) until random off. The keys are src/game/config.cpp's (Enter
+# Start, E A, Q B, W A S D the C buttons, the arrows the stick, Space R).
+#
+# A round: the boot, Start through the logos to the title and its menu, Deathmatch (its mode, players, the Rumble Pak
+# notice) into a Bloodlust match against a bot: 10 s of random moves, turns, jumps and weapon changes, the pause menu
+# (Start), Quit and Yes to its results and the match's setup, B (Q) back to the title menu, whose cursor is back on New
+# Game, then New Game, Normal, the Rumble Pak notice, the opening scene skipped to Choose, Danielle and her scene into
+# the first level, the Breach: 10 s of random input, the pause menu with its Options opened and left by B, Resume, and
+# random input to the end. The arena and the Breach are the round's level change. There is no decomp: the words were
+# read as the game played. The word at 0x801029D4 is the screen the game is running (the code it runs for it): 0x418A68
+# the title, 0x419178 its menu, 0x419570 Deathmatch's mode, 0x41959C its players, 0x4191D8 its Rumble Pak notice,
+# 0x418D18 a match, 0x419860 its pause menu, 0x419834 its results, 0x419808 its setup, 0x4191AC the difficulty,
+# 0x419204 New Game's Rumble Pak notice, 0x21ECB0 the opening, 0x419384 Choose, 0x21ECDC Danielle's scene. Each `until`
+# on it presses on, every 4 s and held 400 ms, until the next screen is up, so a press the game drops (the notices
+# drop some) is pressed again and a slow load is waited for. The word at 0x8011D5A4 is 0 in a level, and the one at
+# 0x8011D510 is 7 while the Breach's pause menu is open. The word at 0x80102E84 (tools/survey.js) is 1 once the boot is
+# past its first stage; past that it climbs through each screen's own states, so it tells no screen from another.
+6 until 0x80102E84 0xFFFFFFFF 1 30
+9 until 0x801029D4 0xFFFFFFFF 0x418A68 50 Enter 400 4
+10 shot title
+13 until 0x801029D4 0xFFFFFFFF 0x419178 15 Enter 400 4
+14 shot menu
+16 key Down 200
+17 key Down 200
+18 until 0x801029D4 0xFFFFFFFF 0x419570 10 Enter 400 4
+19 shot dm-mode
+22 until 0x801029D4 0xFFFFFFFF 0x41959C 10 Enter 400 4
+23 shot dm-players
+26 key Enter 400
+29 until 0x801029D4 0xFFFFFFFF 0x4191D8 15 Enter 400 4
+30 shot dm-rumble
+33 until 0x801029D4 0xFFFFFFFF 0x418D18 20 Enter 400 4
+34 shot dm0
+35 random W,A,S,D,Left,Right,Up,Down,Space,E,Q
+45 random off
+46 shot dm1
+47 until 0x801029D4 0xFFFFFFFF 0x419860 8 Enter 400 4
+48 shot dm-pause
+49 key Down 200
+50 key Down 200
+51 key Down 200
+52 key Enter 400
+54 shot dm-quit
+55 key Up 200
+56 until 0x801029D4 0xFFFFFFFF 0x419834 8 Enter 400 4
+57 shot results
+59 until 0x801029D4 0xFFFFFFFF 0x419808 8 Enter 400 4
+60 shot dm-setup
+63 until 0x801029D4 0xFFFFFFFF 0x419178 20 Q 400 4
+64 shot menu2
+68 shot new-game
+69 until 0x801029D4 0xFFFFFFFF 0x4191AC 10 Enter 400 4
+70 shot difficulty
+73 until 0x801029D4 0xFFFFFFFF 0x419204 10 Enter 400 4
+74 shot rumble
+77 until 0x801029D4 0xFFFFFFFF 0x21ECB0 15 Enter 400 4
+78 shot opening
+81 until 0x801029D4 0xFFFFFFFF 0x419384 15 Enter 400 4
+82 shot choose
+85 until 0x801029D4 0xFFFFFFFF 0x21ECDC 10 Enter 400 4
+86 shot danielle
+87 until 0x8011D5A4 0xFFFFFFFF 0 30
+90 shot breach0
+91 random W,A,S,D,Left,Right,Up,Down,Space,E,Q
+101 random off
+102 shot breach1
+103 key Enter 400
+106 until 0x8011D510 0xFFFFFFFF 7 5
+107 shot pause
+108 key Down 200
+109 key Down 200
+110 key Down 200
+111 key Enter 400
+114 shot options
+115 key Q 400
+118 shot options-back
+119 key Enter 400
+122 shot resumed
+123 random W,A,S,D,Left,Right,Up,Down,Space,E,Q

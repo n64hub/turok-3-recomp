@@ -33,6 +33,8 @@ there, then move this repo's submodule onto the commit.
   says how). Each change a player would notice adds a line to `releases/next.md`; a release moves it to
   `releases/v<version>.md`. Every fix is released: the work that lands one cuts the release once it merges, unasked,
   or waits for one already in flight, which carries it.
+- `tools/soak_plan.txt`: one round through the game's scenes for the desktop soak, a play of the Linux build by it
+  that fails on a crash, an exit or a picture standing still (its header says what the round plays and for how long).
 - `icons/`: drawn by `tools/icon.ps1` from plain text and shapes.
 - Comments beside the code, for how and why: each file's header. Read the header of the file you change and update
   it in the same commit.
