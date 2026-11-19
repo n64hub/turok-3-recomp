@@ -1,0 +1,36 @@
+# Turok 3's answer plan: a press reaches the picture at once and the view stays where the stick leaves it, on its
+# Linux build played by this plan with a stand-in pad. Each line is a step at seconds since the program started, as in
+# tools/soak_plan.txt, and pad <axis> <value> moves the stand-in pad's stick. answer <name> <control> <value> <hold s>
+# <press ms> <still ms> presses a control from a view that holds still and fails when the picture answers later than
+# <press ms> after the press, or settles later than <still ms> after the release.
+#
+# Start (Enter) through the legal screen, the Expansion Pak notice, the logos, the title, New Game, the difficulty and
+# the Rumble Pak notice, the opening, the character choice (Danielle) and her scene, into the Breach's first room.
+# Then the view looked up from level with the right stick and with the Up key, and held up for 1.5 s, each brought back
+# by untimed pad steps. A turn isn't played: the Breach's light flickers over about 60% of the picture by itself, which
+# swamps the turn's answer. v0.2.8 passes: the looks answered 231-243 ms after the press and settled 1-19 ms after the
+# release.
+9 key Enter 400
+13 key Enter 400
+17 key Enter 400
+21 key Enter 400
+25 key Enter 400
+29 key Enter 400
+52 key Enter 400
+57 key Enter 400
+62 key Enter 400
+67 key Enter 400
+78 shot level
+80 answer look-up righty -32768 0.4 500 1000
+85 pad righty 32767
+85.4 pad righty 0
+87 shot level2
+89 answer key-up key:Up 1 0.4 500 1000
+94 pad righty 32767
+94.4 pad righty 0
+96 shot level3
+98 answer hold-up righty -32768 1.5 500 1000
+104 pad righty 32767
+105.5 pad righty 0
+107 shot end
+108 end
