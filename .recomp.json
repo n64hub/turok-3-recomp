@@ -1,0 +1,24 @@
+{
+  "$schema": "https://recomp.fyi/schema/v1.json",
+  "game": "Turok 3: Shadow of Oblivion",
+  "system": "N64",
+  "type": "recomp",
+  "original": {
+    "region": "USA",
+    "sha1": "a2e0a28dc0d3a48c7c02cb9e4c4b38fe04b2d436"
+  },
+  "project": "Turok 3: Recompiled",
+  "status": "released",
+  "targets": [
+    "Windows",
+    "Linux",
+    "Browser"
+  ],
+  "toolchain": "N64recomp",
+  "links": [
+    {
+      "label": "Play in a browser",
+      "url": "https://n64hub.com/turok-3/"
+    }
+  ]
+}
