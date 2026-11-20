@@ -220,3 +220,26 @@ value = 0x3C020008
 func = "func_002CF978"
 before_vram = 0x002CFBF4
 text = "    { void turok_spring_look(uint8_t*, uint32_t, float, uint32_t, float, gpr*, float, float); union { int32_t i; float f; } lo = { MEM_W(0x10, ctx->r17) }, hi = { MEM_W(0x14, ctx->r17) }; turok_spring_look(rdram, (uint32_t)ctx->r18 + 0x6C, 1.0f, (uint32_t)ctx->r16 + 0xDD0, 1.0f, &ctx->r5, lo.f, hi.f); }"
+
+# A retrace sooner (lib/turok-engine's src/frame_pacing.cpp and docs/input_lag.md): the frame starts a retrace before
+# the one it is swapped in at, not right after the swap before it, so it reads the pad and moves the world that much
+# later. The game's retraces a frame is shown for are the word at 0x80139390 (the frame copies it into its task's
+# +0x124, which the swap rule reads) and its count of retraces since the frame on the screen was swapped in the word at
+# 0x801661E0. The frame (func_00285424, Turok 2's func_00287248) waits at its start, once its registers are saved
+# (before the jal at 0x00285438); it has sent its task at 0x00285754, either way (its other way, func_002849BC, Turok
+# 2's func_00286B58 with the map open, sends one task here, not two); and the retrace handler (func_00281BAC) has sent
+# the retrace to the game's threads and read the pads (func_00251604) at 0x00281E48.
+[[patches.hook]]
+func = "func_00285424"
+before_vram = 0x00285438
+text = "    { void turok_start_frame_late(uint8_t*, recomp_context*, uint32_t, uint32_t); turok_start_frame_late(rdram, ctx, 0x80139390, 0x801661E0); }"
+
+[[patches.hook]]
+func = "func_00285424"
+before_vram = 0x00285754
+text = "    { void turok_frame_sent(uint8_t*); turok_frame_sent(rdram); }"
+
+[[patches.hook]]
+func = "func_00281BAC"
+before_vram = 0x00281E48
+text = "    { void turok_retrace(uint8_t*); turok_retrace(rdram); }"
