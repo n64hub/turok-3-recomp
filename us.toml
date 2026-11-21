@@ -39,7 +39,7 @@ ignored = [
     "turok_vm_map_rom_region",
     # osAiGetStatus, the audio thread's pace (lib/turok-engine/src/audio.cpp).
     "turok_ai_get_status",
-    # osMotorInit, which answers as each port's accessory would (lib/turok-engine/src/controller_pak.cpp).
+    # osMotorInit, which answers as a Controller Pak in its port would (lib/turok-engine/src/controller_pak.cpp).
     "turok_motor_init",
     "t3_ExceptionVectors",
     "t3_Exception",
