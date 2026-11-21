@@ -1,8 +1,9 @@
 # The save run of the save check (README.md, with tools/load_plan.txt): at the title menu (0x80125E1C = 1), Start on
 # NEW GAME opens the difficulty screen (4), and A takes Normal and passes the Rumble Pak notice until the opening
 # cutscene plays (0x80125E50 = 1). Start then skips each cutscene and takes Danielle on the character screen until the
-# first level plays: 0x801252C4 is 6 there, and 0 on the title, in a cutscene, on a menu and paused. The pause menu's
-# SAVE GAME then saves to the first empty slot with A, which writes saves/controllerpak_1.mpk. Before it, the health
+# first level plays: 0x801252C4 is 6 there, and 0 on the title, in a cutscene, on a menu and paused. Enter then pauses
+# until it reads 0, pressed only while it doesn't: the skip's last Enter, pressed as the level started, can have
+# paused the game already, and an Enter more would close the menu. The pause menu's SAVE GAME then saves to the first empty slot with A, which writes saves/controllerpak_1.mpk. Before it, the health
 # the checkpoint restores (the halfword at [[0x80100404]]+0x1C, 100 << 8 in a new game) is set to 77: the save holds
 # it, and the load run checks it comes back from it.
 0 until 0x80125E1C 0xFFFFFFFF 1 120
@@ -11,7 +12,7 @@
 4 until 0x801252C4 0xFFFFFFFF 6 240 Enter
 7 shot level
 7.5 poke [[0x80100404]]+0x1C 0x4D00
-8 key Enter 100
+8 until 0x801252C4 0xFFFFFFFF 0 10 Enter 100 3
 9.5 key Down 100
 10.1 key E 100
 12 shot slots
