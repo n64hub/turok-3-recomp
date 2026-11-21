@@ -98,8 +98,8 @@ ultramodern::gfx_callbacks_t::gfx_data_t create_gfx() {
 // player's port. The game offers its multiplayer players for those ports alone.
 // Port 1 has a pak in it: Turok 3 reads the controllers' status for a pak before it opens its Controller Pak save, and
 // with none it stops on "Controller Pak not found". ultramodern reports a pak for any Pak but None, and RumblePak is
-// the only other it has; which pak the game finds is the engine's (lib/turok-engine/src/controller_pak.cpp, a
-// Controller Pak in port 1 and nothing in the others).
+// the only other it has; which pak the game finds is the GameEntry's controller_pak_ports (turok::controller_pak_ports,
+// a Controller Pak in port 1 and nothing in the others).
 ultramodern::input::connected_device_info_t get_connected_device_info(int controller_num) {
     bool unassigned = recompinput::players::get_number_of_assigned_players() == 0;
     if ((unassigned && (controller_num == 0 || (size_t)controller_num < recompinput::get_detected_controller_count())) ||
@@ -348,6 +348,8 @@ std::vector<recomp::GameEntry> supported_games = {
         .save_type = recomp::SaveType::None,
         .thumbnail_bytes = std::span<const char>(icon_bytes),
         .is_enabled = true,
+        // Its pak, the runtime's (librecomp/src/pak.cpp): saves/controllerpak_1.mpk.
+        .controller_pak_ports = turok::controller_pak_ports,
         .entrypoint_address = turok::boot_load_address,
         .entrypoint = recomp_entrypoint,
         .thread_create_callback = turok::on_thread_create,
