@@ -68,7 +68,8 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
 - The rest is Turok 2's: the FPU in FR mode (`turok::set_fpu_mode`), the VM server (`turok_vm_map_rom_region`), the
   DMA thread (`turok_pi_raw_start_dma`, OS_EVENT_PI with message 0x7D1), the audio pace (`turok_ai_get_status`), the
   default VI mode the game waits on (osViModeNtscLpn1 at 0x8010BEC0), osClockRate (0x80171B40), a Controller Pak in
-  port 1 and osMotorInit for the Rumble Pak (`turok_motor_init`), and aspMain, byte for byte Turok 2's.
+  port 1 and osMotorInit for the Rumble Pak (`turok_motor_init`), and aspMain, byte for byte Turok 2's. Its pak has
+  3 banks (`turok::controller_pak_banks<3>`), not Turok 2's 12: a save takes 16 pages, not 90.
 - Widescreen (lib/turok-engine's `docs/widescreen.md`) hooks Turok 2's places, found by their code, each with a comment
   in `us.toml`: the frame (func_00285424) starts its display list, whose head is the pointer at 0x80138230, and ends
   it; the HUD's rectangles are func_0028D318's, but for its messages (func_00214C3C, func_00214FC0), closed out of it;
