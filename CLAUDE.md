@@ -70,6 +70,11 @@ Turok 3 runs Turok 2's engine with its renderer rewritten, so most of Turok 2's 
   default VI mode the game waits on (osViModeNtscLpn1 at 0x8010BEC0), osClockRate (0x80171B40), a Controller Pak in
   port 1 and osMotorInit for the Rumble Pak (`turok_motor_init`), and aspMain, byte for byte Turok 2's. Its pak has
   3 banks (`turok::controller_pak_banks<3>`), not Turok 2's 12: a save takes 16 pages, not 90.
+- Its rumble code is Turok 2's: func_00251DD8 probes, from four callers that walk the controller structs (0x80131ED0 +
+  0x224 per port), with the struct's OSPfs at +0xD8, and sets the Rumble Pak's flag at +0xC8; func_00251C94 drives the
+  motor each frame. The save screens (func_004045C8, func_004051F0, func_00405998) probe with their own OSPfs, in a
+  table at 0x80177250. `turok::set_rumble_pfs` in `on_init` gives the first a Rumble Pak in port 1, so the controller
+  rumbles, and the second still finds the Controller Pak.
 - Widescreen (lib/turok-engine's `docs/widescreen.md`) hooks Turok 2's places, found by their code, each with a comment
   in `us.toml`: the frame (func_00285424) starts its display list, whose head is the pointer at 0x80138230, and ends
   it; the HUD's rectangles are func_0028D318's, but for its messages (func_00214C3C, func_00214FC0), closed out of it;

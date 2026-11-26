@@ -1,0 +1,1 @@
+- **Rumble works:** the controller vibrates where the game drives its Rumble Pak. The game looked for a Rumble Pak in the slot that holds your Controller Pak, always found the Controller Pak, and so never started the motor. Your saves stay where they were.

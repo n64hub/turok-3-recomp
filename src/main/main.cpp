@@ -99,7 +99,8 @@ ultramodern::gfx_callbacks_t::gfx_data_t create_gfx() {
 // Port 1 has a pak in it: Turok 3 reads the controllers' status for a pak before it opens its Controller Pak save, and
 // with none it stops on "Controller Pak not found". ultramodern reports a pak for any Pak but None, and RumblePak is
 // the only other it has; which pak the game finds is the GameEntry's controller_pak_ports (turok::controller_pak_ports,
-// a Controller Pak in port 1 and nothing in the others).
+// a Controller Pak in port 1 and nothing in the others), but for the rumble code, which finds this Rumble Pak
+// (turok::set_rumble_pfs in on_init).
 ultramodern::input::connected_device_info_t get_connected_device_info(int controller_num) {
     bool unassigned = recompinput::players::get_number_of_assigned_players() == 0;
     if ((unassigned && (controller_num == 0 || (size_t)controller_num < recompinput::get_detected_controller_count())) ||
@@ -334,6 +335,10 @@ static void on_init(uint8_t* rdram, recomp_context* ctx) {
     // The game's display list head (gDL), which every draw routine writes through: the engine's widescreen writes
     // RT64's extended GBI there (lib/turok-engine/src/widescreen.cpp).
     turok::set_display_list_head(0x80138230);
+    // Where the rumble code keeps each port's OSPfs, at +0xD8 of its controller structs (0x80131ED0, 0x224 apart), so
+    // its osMotorInit finds the Rumble Pak port 1 reports while the save screens' finds the Controller Pak: it then
+    // starts and stops the motor (lib/turok-engine/src/controller_pak.cpp).
+    turok::set_rumble_pfs(0x80131FA8, 0x224);
 }
 
 std::vector<recomp::GameEntry> supported_games = {
