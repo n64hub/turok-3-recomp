@@ -230,6 +230,22 @@ func = "func_002CF978"
 before_vram = 0x002CFBF4
 text = "    { void turok_spring_look(uint8_t*, uint32_t, float, uint32_t, float, gpr*, float, float); union { int32_t i; float f; } lo = { MEM_W(0x10, ctx->r17) }, hi = { MEM_W(0x14, ctx->r17) }; turok_spring_look(rdram, (uint32_t)ctx->r18 + 0x6C, 1.0f, (uint32_t)ctx->r16 + 0xDD0, 1.0f, &ctx->r5, lo.f, hi.f); }"
 
+# The same on a ladder (func_002D26F4, the player's state 15: its struct in s0, its object in s1), which doesn't turn
+# the body: it eases a head turn (+0xDD4, radians, growing to the right, which the camera adds to the object's yaw)
+# towards the stick's left and right times 200 degrees, before the call at 0x002D280C, and the pitch (+0xDD0) towards
+# its up and down within 90 degrees, before the call at 0x002D286C, the targets in a1, and both spring back once the
+# stick is let go. turok_spring_turn holds the head's turn with the mouse's left and right movement, and
+# turok_spring_pitch the pitch, the one held on foot, with its up and down.
+[[patches.hook]]
+func = "func_002D26F4"
+before_vram = 0x002D280C
+text = "    { void turok_spring_turn(uint8_t*, uint32_t, float, gpr*, float, float); turok_spring_turn(rdram, (uint32_t)ctx->r16 + 0xDD4, 1.0f, &ctx->r5, -3.4906585f, 3.4906585f); }"
+
+[[patches.hook]]
+func = "func_002D26F4"
+before_vram = 0x002D286C
+text = "    { void turok_spring_pitch(uint8_t*, uint32_t, float, gpr*, float, float); turok_spring_pitch(rdram, (uint32_t)ctx->r16 + 0xDD0, 1.0f, &ctx->r5, -1.5707964f, 1.5707964f); }"
+
 # A retrace sooner (lib/turok-engine's src/frame_pacing.cpp and docs/input_lag.md): the frame starts a retrace before
 # the one it is swapped in at, not right after the swap before it, so it reads the pad and moves the world that much
 # later. The game's retraces a frame is shown for are the word at 0x80139390 (the frame copies it into its task's

@@ -1,1 +1,2 @@
 - **Rumble works:** the controller vibrates where the game drives its Rumble Pak. The game looked for a Rumble Pak in the slot that holds your Controller Pak, always found the Controller Pak, and so never started the motor. Your saves stay where they were.
+- **Mouse look on ladders:** the mouse now looks around while you climb, as it does on foot: left and right turns your head on the ladder, up and down looks up and down, and the view stays where you leave it. The arrow keys and the right stick do the same at a steady speed instead of springing back when let go.
